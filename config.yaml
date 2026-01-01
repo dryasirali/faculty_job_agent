@@ -10,32 +10,62 @@ cv:
   pdf_path: "CV_YasirAli.pdf"
 
 search:
-  max_results_email: 15
-  days_freshness_boost: 28
+  max_results_email: 18          # broader daily coverage
+  days_freshness_boost: 30       # keep jobs visible for ~1 month
 
 sources:
-  # USA — HigherEdJobs (keep these as they were working for you)
-  # If you later want even more coverage, we can add more catIDs once you confirm which disciplines you prefer.
+  # =========================
+  # USA — HigherEdJobs (core)
+  # =========================
   higheredjobs_rss:
-    - "https://www.higheredjobs.com/rss/categoryFeed.cfm?catID=102"   # Computer Science (commonly used)
-    - "https://www.higheredjobs.com/rss/categoryFeed.cfm?catID=116"   # Computer Engineering (commonly used)
-    - "https://www.higheredjobs.com/rss/categoryFeed.cfm?catID=117"   # Electrical Engineering (commonly used)
+    - "https://www.higheredjobs.com/rss/categoryFeed.cfm?catID=102"   # Computer Science
+    - "https://www.higheredjobs.com/rss/categoryFeed.cfm?catID=116"   # Computer Engineering
+    - "https://www.higheredjobs.com/rss/categoryFeed.cfm?catID=117"   # Electrical Engineering
 
-  # EU/UK + also international coverage
+  # =========================
+  # UK / EU — jobs.ac.uk
+  # =========================
   jobs_ac_uk_rss:
     - "https://www.jobs.ac.uk/feeds/subject-areas/engineering-and-technology"
     - "https://www.jobs.ac.uk/feeds/subject-areas/computer-sciences"
     - "https://www.jobs.ac.uk/feeds/locations/europe"
     - "https://www.jobs.ac.uk/feeds/locations/north-south-and-central-america"
 
-  # Global academic board (broad coverage; results depend on what the site includes)
+  # =========================
+  # EU Commission portal (VERY IMPORTANT)
+  # =========================
+  euraxess_rss:
+    - "https://euraxess.ec.europa.eu/jobs/search/feed"
+
+  # =========================
+  # Netherlands (high-quality academic hiring)
+  # =========================
+  academictransfer_rss:
+    - "https://www.academictransfer.com/en/jobs/rss/"
+
+  # =========================
+  # Germany / DACH academic portal
+  # =========================
+  hochschulstellen_rss:
+    - "https://www.hochschulstellen.de/stellenangebote/rss"
+
+  # =========================
+  # Global academic aggregator
+  # =========================
   academic_positions_rss:
     - "https://academicpositions.com/rss"
 
+  # =========================
+  # Engineering-heavy academic board
+  # =========================
+  academickeys_rss:
+    - "https://engineering.academickeys.com/rss/Electrical_and/or_Electronics"
+    - "https://engineering.academickeys.com/rss/Computer_Engineering"
+
 matching:
-  # Includes: tenure-track + teaching stream + research faculty
+  # Tenure-track + teaching stream + research faculty
   include_title_regex:
-    # Tenure-track / professorial
+    # Professorial / tenure-track
     - "(?i)assistant professor"
     - "(?i)associate professor"
     - "(?i)full professor"
@@ -43,7 +73,7 @@ matching:
     - "(?i)tenured"
     - "(?i)professor\\b"
 
-    # EU/UK-style titles
+    # EU / UK titles
     - "(?i)lecturer"
     - "(?i)senior lecturer"
     - "(?i)reader\\b"
@@ -56,16 +86,15 @@ matching:
     - "(?i)teaching track"
     - "(?i)teaching stream"
     - "(?i)professor of practice"
-    - "(?i)clinical professor"     # often used for teaching-focused lines in some systems
+    - "(?i)clinical professor"
 
     # Research faculty
     - "(?i)research (assistant|associate|full) professor"
     - "(?i)research faculty"
     - "(?i)research scientist"
-    - "(?i)principal investigator"
     - "(?i)faculty fellow"
+    - "(?i)principal investigator"
 
-  # Still exclude roles you explicitly do NOT want
   exclude_title_regex:
     - "(?i)postdoc"
     - "(?i)post-doctoral"
@@ -77,14 +106,14 @@ matching:
     - "(?i)visiting\\b"
     - "(?i)temporary\\b"
 
-  # Engineering/ECE/CS coverage aligned to your CV areas
+  # Engineering / ECE / CS / Control / AI / Communications
   positive_keywords:
     - "electrical engineering"
     - "computer engineering"
     - "computer science"
+    - "engineering"
     - "ece"
     - "ee"
-    - "engineering"
     - "control"
     - "control systems"
     - "cyber-physical"
@@ -116,7 +145,7 @@ matching:
     - "real-time systems"
     - "industrial automation"
 
-  # Keep noise out (education/health/social)
+  # Strong noise suppression
   negative_keywords:
     - "elementary"
     - "school of education"
