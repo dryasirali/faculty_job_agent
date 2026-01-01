@@ -1,0 +1,61 @@
+email:
+  to_email: "yasiralicse@gmail.com"
+  from_email: "yasiralicse@gmail.com"
+  smtp_host: "smtp.gmail.com"
+  smtp_port: 587
+  smtp_username: "yasiralicse@gmail.com"
+
+cv:
+  pdf_path: "CV_YasirAli.pdf"
+
+search:
+  max_results_email: 8
+  days_freshness_boost: 14
+
+sources:
+  higheredjobs_rss:
+    - "https://www.higheredjobs.com/rss/categoryFeed.cfm?catID=68"
+
+  jobs_ac_uk_rss:
+    - "https://www.jobs.ac.uk/feeds/subject-areas/engineering-and-technology"
+    - "https://www.jobs.ac.uk/feeds/locations/europe"
+    - "https://www.jobs.ac.uk/feeds/locations/north-south-and-central-america"
+
+matching:
+  include_title_regex:
+    - "(?i)assistant professor"
+    - "(?i)tenure[-\\s]?track"
+    - "(?i)lecturer"
+    - "(?i)faculty"
+    - "(?i)research (assistant|associate) professor"
+    - "(?i)junior professor"
+    - "(?i)ma[iî]tre de conf[ée]rences"
+
+  exclude_title_regex:
+    - "(?i)postdoc"
+    - "(?i)phd student"
+    - "(?i)intern"
+    - "(?i)adjunct"
+
+  positive_keywords:
+    - "cyber-physical"
+    - "control"
+    - "secure"
+    - "resilient"
+    - "polar code"
+    - "channel coding"
+    - "communications"
+    - "uav"
+    - "ai"
+    - "machine learning"
+
+  negative_keywords:
+    - "sales"
+    - "marketing"
+
+scoring:
+  title_match: 6.0
+  keyword_hit: 1.2
+  cv_similarity: 6.0
+  freshness_boost: 2.5
+  penalty_negative_keyword: -2.0
