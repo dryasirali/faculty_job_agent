@@ -6,6 +6,7 @@ email:
   smtp_username: "yasiralicse@gmail.com"
 
 cv:
+  # Make sure the repo file name matches EXACTLY (case-sensitive)
   pdf_path: "CV_YasirAli.pdf"
 
 search:
@@ -13,11 +14,15 @@ search:
   days_freshness_boost: 14
 
 sources:
+  # Keep HigherEdJobs in a safer / broader way, then rely on filters below to keep it engineering-only
+  # (The previous catID feed was too broad and produced Education/Counseling roles.)
   higheredjobs_rss:
-    - "https://www.higheredjobs.com/rss/categoryFeed.cfm?catID=68"
+    - "https://www.higheredjobs.com/rss/"
 
+  # jobs.ac.uk feeds are already strong; add Computer Sciences for better CS/ECE coverage
   jobs_ac_uk_rss:
     - "https://www.jobs.ac.uk/feeds/subject-areas/engineering-and-technology"
+    - "https://www.jobs.ac.uk/feeds/subject-areas/computer-sciences"
     - "https://www.jobs.ac.uk/feeds/locations/europe"
     - "https://www.jobs.ac.uk/feeds/locations/north-south-and-central-america"
 
@@ -28,6 +33,7 @@ matching:
     - "(?i)lecturer"
     - "(?i)faculty"
     - "(?i)research (assistant|associate) professor"
+    - "(?i)professor\\b"
     - "(?i)junior professor"
     - "(?i)ma[iî]tre de conf[ée]rences"
 
@@ -35,23 +41,61 @@ matching:
     - "(?i)postdoc"
     - "(?i)phd student"
     - "(?i)intern"
+    - "(?i)technician"
     - "(?i)adjunct"
+    - "(?i)visiting\\b"
 
+  # Expanded to capture ECE/EE/CS faculty ads aligned with your CV areas (CPS/control/security/coding/UAV/AI)
   positive_keywords:
-    - "cyber-physical"
+    - "electrical engineering"
+    - "computer engineering"
+    - "computer science"
+    - "ece"
+    - "ee"
+    - "engineering"
     - "control"
-    - "secure"
+    - "control systems"
+    - "cyber-physical"
+    - "cps"
+    - "networked control"
+    - "cloud control"
+    - "model predictive control"
+    - "mpc"
     - "resilient"
-    - "polar code"
-    - "channel coding"
+    - "resilience"
+    - "security"
+    - "secure"
     - "communications"
+    - "wireless"
+    - "channel coding"
+    - "coding theory"
+    - "polar code"
+    - "information theory"
+    - "signal processing"
+    - "robotics"
+    - "autonomous"
     - "uav"
+    - "aerial vehicle"
     - "ai"
     - "machine learning"
+    - "deep learning"
+    - "optimization"
 
+  # Expanded to aggressively remove Education/Counseling/Health/Social roles that were polluting results
   negative_keywords:
     - "sales"
     - "marketing"
+    - "elementary"
+    - "school of education"
+    - "education"
+    - "counseling"
+    - "higher education"
+    - "curriculum"
+    - "literacy"
+    - "psychology"
+    - "nursing"
+    - "public health"
+    - "social work"
 
 scoring:
   title_match: 6.0
