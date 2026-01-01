@@ -6,46 +6,78 @@ email:
   smtp_username: "yasiralicse@gmail.com"
 
 cv:
-  # Make sure the repo file name matches EXACTLY (case-sensitive)
+  # Must match repo file name EXACTLY (case-sensitive)
   pdf_path: "CV_YasirAli.pdf"
 
 search:
-  max_results_email: 8
-  days_freshness_boost: 14
+  max_results_email: 15
+  days_freshness_boost: 28
 
 sources:
+  # USA — HigherEdJobs (keep these as they were working for you)
+  # If you later want even more coverage, we can add more catIDs once you confirm which disciplines you prefer.
   higheredjobs_rss:
-    - "https://www.higheredjobs.com/rss/"
+    - "https://www.higheredjobs.com/rss/categoryFeed.cfm?catID=102"   # Computer Science (commonly used)
+    - "https://www.higheredjobs.com/rss/categoryFeed.cfm?catID=116"   # Computer Engineering (commonly used)
+    - "https://www.higheredjobs.com/rss/categoryFeed.cfm?catID=117"   # Electrical Engineering (commonly used)
 
+  # EU/UK + also international coverage
   jobs_ac_uk_rss:
     - "https://www.jobs.ac.uk/feeds/subject-areas/engineering-and-technology"
     - "https://www.jobs.ac.uk/feeds/subject-areas/computer-sciences"
     - "https://www.jobs.ac.uk/feeds/locations/europe"
     - "https://www.jobs.ac.uk/feeds/locations/north-south-and-central-america"
 
+  # Global academic board (broad coverage; results depend on what the site includes)
   academic_positions_rss:
     - "https://academicpositions.com/rss"
 
 matching:
+  # Includes: tenure-track + teaching stream + research faculty
   include_title_regex:
+    # Tenure-track / professorial
     - "(?i)assistant professor"
+    - "(?i)associate professor"
+    - "(?i)full professor"
     - "(?i)tenure[-\\s]?track"
-    - "(?i)lecturer"
-    - "(?i)faculty"
-    - "(?i)research (assistant|associate) professor"
+    - "(?i)tenured"
     - "(?i)professor\\b"
+
+    # EU/UK-style titles
+    - "(?i)lecturer"
+    - "(?i)senior lecturer"
+    - "(?i)reader\\b"
     - "(?i)junior professor"
     - "(?i)ma[iî]tre de conf[ée]rences"
 
+    # Teaching stream
+    - "(?i)teaching (assistant|associate|full) professor"
+    - "(?i)teaching professor"
+    - "(?i)teaching track"
+    - "(?i)teaching stream"
+    - "(?i)professor of practice"
+    - "(?i)clinical professor"     # often used for teaching-focused lines in some systems
+
+    # Research faculty
+    - "(?i)research (assistant|associate|full) professor"
+    - "(?i)research faculty"
+    - "(?i)research scientist"
+    - "(?i)principal investigator"
+    - "(?i)faculty fellow"
+
+  # Still exclude roles you explicitly do NOT want
   exclude_title_regex:
     - "(?i)postdoc"
+    - "(?i)post-doctoral"
     - "(?i)phd student"
+    - "(?i)doctoral student"
     - "(?i)intern"
     - "(?i)technician"
     - "(?i)adjunct"
     - "(?i)visiting\\b"
+    - "(?i)temporary\\b"
 
-  # Expanded to capture ECE/EE/CS faculty ads aligned with your CV areas (CPS/control/security/coding/UAV/AI)
+  # Engineering/ECE/CS coverage aligned to your CV areas
   positive_keywords:
     - "electrical engineering"
     - "computer engineering"
@@ -61,30 +93,31 @@ matching:
     - "cloud control"
     - "model predictive control"
     - "mpc"
-    - "resilient"
-    - "resilience"
-    - "security"
-    - "secure"
-    - "communications"
-    - "wireless"
-    - "channel coding"
-    - "coding theory"
-    - "polar code"
-    - "information theory"
-    - "signal processing"
     - "robotics"
     - "autonomous"
     - "uav"
     - "aerial vehicle"
+    - "communications"
+    - "wireless"
+    - "signal processing"
+    - "information theory"
+    - "coding theory"
+    - "channel coding"
+    - "polar code"
+    - "security"
+    - "secure"
+    - "resilient"
+    - "resilience"
     - "ai"
     - "machine learning"
     - "deep learning"
     - "optimization"
+    - "embedded"
+    - "real-time systems"
+    - "industrial automation"
 
-  # Expanded to aggressively remove Education/Counseling/Health/Social roles that were polluting results
+  # Keep noise out (education/health/social)
   negative_keywords:
-    - "sales"
-    - "marketing"
     - "elementary"
     - "school of education"
     - "education"
@@ -96,10 +129,12 @@ matching:
     - "nursing"
     - "public health"
     - "social work"
+    - "marketing"
+    - "sales"
 
 scoring:
   title_match: 6.0
-  keyword_hit: 1.2
-  cv_similarity: 6.0
-  freshness_boost: 2.5
+  keyword_hit: 1.0
+  cv_similarity: 5.5
+  freshness_boost: 3.0
   penalty_negative_keyword: -2.0
