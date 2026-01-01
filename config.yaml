@@ -14,17 +14,17 @@ search:
   days_freshness_boost: 14
 
 sources:
-  # Keep HigherEdJobs in a safer / broader way, then rely on filters below to keep it engineering-only
-  # (The previous catID feed was too broad and produced Education/Counseling roles.)
   higheredjobs_rss:
     - "https://www.higheredjobs.com/rss/"
 
-  # jobs.ac.uk feeds are already strong; add Computer Sciences for better CS/ECE coverage
   jobs_ac_uk_rss:
     - "https://www.jobs.ac.uk/feeds/subject-areas/engineering-and-technology"
     - "https://www.jobs.ac.uk/feeds/subject-areas/computer-sciences"
     - "https://www.jobs.ac.uk/feeds/locations/europe"
     - "https://www.jobs.ac.uk/feeds/locations/north-south-and-central-america"
+
+  academic_positions_rss:
+    - "https://academicpositions.com/rss"
 
 matching:
   include_title_regex:
